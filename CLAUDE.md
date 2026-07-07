@@ -76,7 +76,7 @@ calculation would miss.
 
 - `corepack pnpm dev` — run the dev server
 - `corepack pnpm build` — production build
-- `corepack pnpm exec tsc --noEmit` — typecheck (no dedicated `typecheck` script yet)
+- `corepack pnpm typecheck` — typecheck (`tsc --noEmit`)
 - `corepack pnpm lint` — ESLint
 
 No test framework is set up yet (no vitest/jest). Core `lib/bread` logic has been manually verified via a
