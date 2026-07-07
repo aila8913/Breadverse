@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Breadverse 麵包星系地圖
 
-## Getting Started
+> 世界上數不盡的烘焙，彷彿星星一般閃耀——每一顆，都有其存在的價值和空間。
 
-First, run the development server:
+## 為什麼做這個
+
+這個產品始於一個很個人的願望：**想吃麵包，又不想吃外面標準的高糖高油麵包**。市售的「健康麵包」又貴得不像日常食物。於是開始自己研究、自己烤——低豐富度的、長時間發酵的、酸種的——然後發現一件事：
+
+麵包的世界遠比架上看到的遼闊。含水量、發酵時間、穀物結構、麵筋強度……每換一個維度去看，同一顆麵包就換一個位置。法棍和布里歐修不是「好與壞」，它們只是宇宙中不同的星星。
+
+Breadverse 把這個世界畫出來：**每一份食譜，都是星空中的一顆星。**
+
+## 產品理念
+
+這是一個感性優先的產品。技術是為了讓感受可以被信任，而不是反過來。
+
+- **每顆星都有它的位置。** 這個 app 不評判任何麵包。高糖高油的布里歐修在別人的星空裡依然是亮星。
+- **濾鏡是觀點，不是刪除。** 當你套上自己的觀點（例如「健康派」：低豐富度、長發酵），不符合的星星只會**變暗、變小——不會消失**。就像真實的夜空本來就有亮星和暗星，你看見的是屬於自己的星座，而宇宙始終完整。
+- **先為一個人做。** 第一個使用者就是作者自己。為一個很具體的人設計，勝過為「所有人」設計——沒有明確目標的人打開 app，看到的是完整的星空；有目標的人，一鍵切換到自己的視野。
+
+## 你會看到什麼
+
+- **3D 麵包星系**——產品的靈魂。自由旋轉的三維星空，你存下的食譜（亮點）與經典麵包（法棍、佛卡夏、布里歐修……）同場漂浮。五個維度任選三個當 X/Y/Z 軸，換一組軸，宇宙就重新排列一次。
+- **雷達圖**——閱讀單一食譜的性格。五邊形一眼看出這顆麵包「是什麼樣的存在」，也能疊上一顆經典麵包當參照。
+- **食譜輸入**——填入食材克數和製法，烘焙百分比與五維座標即時算出來，還沒存檔就能先看到自己的麵包會落在星空何處。
+
+## 五個維度（星空的座標系）
+
+每份食譜被計算成五條 0–1 的軸：
+
+| 軸 | 來源 |
+|---|---|
+| 含水量 | 由食材克數推導——是**真實含水量**：牛奶、蛋、奶油裡的水分都算進去，不是天真的烘焙百分比 |
+| 豐富度 | 由糖、油脂等 enrichment 推導 |
+| 穀物結構 | 由全穀/精製穀物比例推導 |
+| 發酵時間 | 使用者記錄的製法（酸種？商業酵母？幾小時？）——**刻意不從食材反推** |
+| 麵筋發展 | 使用者記錄的揉捏方式——同上，這是製法的事，不是秤重的事 |
+
+## 技術（簡短版）
+
+Next.js 16 (App Router) + React 19 + TypeScript。3D 星空用 Three.js（React Three Fiber + drei），雷達圖是手寫 SVG。核心計算層（`src/lib/bread/`）與框架無關。目前資料只存在瀏覽器 localStorage——這是刻意的：先做好一個人用的產品，社群是很久以後的事。
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+corepack pnpm install   # 安裝依賴
+corepack pnpm dev       # 啟動開發伺服器 → http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+開發中的問題與規劃見 [GitHub Issues](https://github.com/aila8913/Breadverse/issues)；給 AI 協作工具的完整專案脈絡在 `CLAUDE.md`。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*這也是一個學習項目——作者正透過打造它，從頭學習全端開發。星空和人一起長大。*
