@@ -2,7 +2,8 @@
 
 > This is a **live snapshot**, not a log — overwrite the "Current state" section at the end of each
 > work session instead of appending to it. For static repo layout/commands/domain model, see `CLAUDE.md`.
-> For permanent history of *why* things changed, use commit messages once this repo is under git.
+> For permanent history of *why* things changed, use commit messages. **For the backlog of
+> planned-but-not-done work, see GitHub Issues** (`gh issue list --repo aila8913/Breadverse`), not this file.
 
 _Last updated: 2026-07-07 (session: built the first real UI on top of the domain layer from the prior
 session. Shipped a recipe form (ingredient lines + method fields) wired live to
@@ -13,8 +14,10 @@ fermentation-naturalness, leanness), but the user asked for something more ambit
 **3D scatter map** (`Bread3DMap.tsx`, React Three Fiber + drei) plotting saved recipes + classic-bread
 references in 3D space, with all 3 axes freely selectable from the 5 radar axes (not fixed to the health
 metrics). The health panel was removed (`health.ts`/`HealthPanel.tsx` deleted) since the 3D map superseded
-it. `git init` was done in the previous session; this session's work is being committed and pushed to
-`https://github.com/aila8913/Breadverse.git` for the first time.)_
+it. Pushed to a real GitHub remote for the first time (`https://github.com/aila8913/Breadverse.git`), then
+filed 4 issues (#1–#4) from the user's first hands-on feedback after trying the 3D map: drop negative
+coordinates, clarify what "zoom direction" control they want, make axis labels always face the camera
+(billboard), and add quick preset-view buttons (top/left/right).)_
 
 ## Current state
 
@@ -47,11 +50,12 @@ it. `git init` was done in the previous session; this session's work is being co
 - Git: repo initialized last session; this session's commit is the first one pushed to a real GitHub
   remote (`https://github.com/aila8913/Breadverse.git`).
 
-## Next up (not started)
+## Next up
 
-- Dark-mode-aware colors for the 3D map (read the CSS custom properties via `getComputedStyle`/a
-  `prefers-color-scheme` listener, since Three.js can't consume `var(--...)` directly).
-- Recipe versioning (v1.0/v1.1/...) + crumb-shot photo upload (Baking Journal) — later phase per original
-  spec; `version` is currently always hardcoded to `"v1.0"`.
-- Consider whether the 2D `RadarChart` and the 3D map should both stay, or whether one should become the
-  primary "explore" view and the other a secondary/detail view.
+See `gh issue list --repo aila8913/Breadverse` for the live backlog. As of this writing: #1 (drop negative
+coordinates in the 3D map), #2 (nail down what zoom-direction control the user wants — needs a follow-up
+question, not just implementation), #3 (billboard the axis labels), #4 (preset top/left/right view
+buttons). Also still open, not yet filed as issues: dark-mode-aware 3D map colors (`getComputedStyle`/a
+`prefers-color-scheme` listener, since Three.js can't consume `var(--...)` directly), recipe versioning
+(`version` is hardcoded to `"v1.0"`), and whether the 2D `RadarChart` and the 3D map should both stay
+long-term or one should become primary.
