@@ -6,9 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Early-stage learning project — **Breadverse (麵包星系地圖)**, a visual bread-recipe app. Given a recipe's
 ingredient weights and method, it computes five normalized "flavor axes" (hydration, richness, grain
-structure, fermentation time, gluten development) and plots them as a radar chart per recipe, and as points
-on a 2D scatter map (any two axes as X/Y) so recipes can be compared against each other and against
-classic breads (baguette, focaccia, brioche, ...).
+structure, fermentation time, gluten development). Two visualizations consume these axes: a 2D radar chart
+per recipe (`RadarChart.tsx`), and a freely-rotatable **3D scatter map** (`Bread3DMap.tsx`, React Three
+Fiber + drei) with any 3 of the 5 axes assignable to X/Y/Z, plotting saved recipes against classic-bread
+reference points (baguette, focaccia, brioche, ...).
 
 The user is learning full-stack development through building this, at a sophomore Information Management
 student level. See "Collaboration style" below.
@@ -17,6 +18,8 @@ student level. See "Collaboration style" below.
 
 - Next.js 16 (App Router) + React 19 + TypeScript 5.9, single package (no monorepo)
 - Tailwind CSS 4
+- 3D rendering: `three` + `@react-three/fiber` + `@react-three/drei` (the 3D map, `OrbitControls` for
+  free rotation, `<Html>` for hover tooltips anchored to 3D points)
 - Storage: **browser localStorage only** — no backend/DB yet. Deliberate choice: this is a solo-use app for
   now; a shared/community backend is explicitly a "someday, lowest priority" idea, not something to build
   toward prematurely.
@@ -26,12 +29,16 @@ student level. See "Collaboration style" below.
 ## Repo layout
 
 ```
-src/app/            Next.js App Router pages
+src/app/            Next.js App Router pages (page.tsx has the recipe form + wiring)
+src/components/      React components (UI layer — everything here may import from lib/bread)
+  RadarChart.tsx     hand-rolled SVG radar chart, no charting library
+  Bread3DMap.tsx      React Three Fiber 3D scatter map, free axis selection + OrbitControls
 src/lib/bread/       core domain logic, framework-agnostic (no React/Next imports)
   types.ts           Ingredient / Recipe / RecipeMethod types
   ingredients.ts     seed ingredient DB, incl. per-ingredient water-content ratios
   percentage.ts      baker's percentage + true hydration + richness calculations
   axes.ts            combines percentage.ts output + method fields into the 5 radar axes
+  axisLabels.ts       Chinese axis titles + the fixed axis order shared by every chart/table
   classicBreads.ts   reference coordinates for classic breads (map background layer)
   storage.ts         localStorage read/write for saved recipes
 ```
@@ -62,11 +69,14 @@ further.
 
 ## Current gaps (don't assume otherwise)
 
-- No UI yet for recipe entry, radar chart, or scatter map — only the calculation layer (`src/lib/bread/`)
-  exists so far. `src/app/page.tsx` is still the default Next.js scaffold page.
-- No git repo initialized yet in this folder.
 - `classicBreads.ts` values are hand-estimated placeholders, not derived from real recipes — expect to
   tune them once a few real recipes have been logged.
+- `Bread3DMap.tsx` hardcodes its point colors as literal hex (`#2a78d6`/`#898781`) instead of the
+  `var(--chart-...)` custom properties the rest of the app uses — **Three.js's color parser can't read
+  CSS custom properties** (it's not going through the DOM/CSSOM), so the 3D scene doesn't currently
+  re-theme for dark mode the way the 2D chart/DOM chrome does.
+- `Recipe.version` is always hardcoded to `"v1.0"` on save — recipe versioning (v1.0 → v1.1) is a later
+  "Baking Journal" phase, not implemented yet.
 
 ## Collaboration style
 

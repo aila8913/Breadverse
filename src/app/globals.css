@@ -3,6 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Chart tokens — see the dataviz skill's palette.md for where these values come from. */
+  --chart-surface: #fcfcfb;
+  --chart-text-secondary: #52514e;
+  --chart-muted: #898781;
+  --chart-gridline: #e1e0d9;
+  --chart-series-1: #2a78d6; /* categorical slot 1 (blue) — the recipe being edited */
+  --chart-reference: #898781; /* muted gray — classic-bread reference overlay, de-emphasized */
 }
 
 @theme inline {
@@ -16,6 +24,13 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    --chart-surface: #1a1a19;
+    --chart-text-secondary: #c3c2b7;
+    --chart-muted: #898781;
+    --chart-gridline: #2c2c2a;
+    --chart-series-1: #3987e5;
+    --chart-reference: #898781;
   }
 }
 
