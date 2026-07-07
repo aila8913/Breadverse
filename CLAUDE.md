@@ -14,6 +14,23 @@ reference points (baguette, focaccia, brioche, ...).
 The user is learning full-stack development through building this, at a sophomore Information Management
 student level. See "Collaboration style" below.
 
+## Product philosophy (read this before proposing features or trade-offs)
+
+Breadverse is, by the user's own definition, an **emotional (感性) product first, a technical one second**.
+When experience and engineering pull in different directions, experience wins:
+
+- The 3D galaxy map is the product's **soul and WOW point** — the name 麵包星系地圖 is a promise it
+  fulfills. It is a place to *browse and be amazed*; the 2D radar is the place to *read* one recipe. Do
+  not propose replacing the 3D map with something "more practical" (that mistake was made once and
+  corrected). Its interaction feel is core investment, not polish.
+- The first TA is the user herself: health-focused (low richness is a hard floor; sourdough/long
+  fermentation is a bonus). Personal goals become **presets/lenses over the axis values**, defaulting to
+  show-everything — the app never judges a bread.
+- Filters in the galaxy **dim/shrink non-matching stars rather than hiding them** — night-sky metaphor:
+  every bread keeps its place in the universe; a lens only changes which stars shine for *you*.
+- Prefer star/galaxy language in UI copy and design discussion (亮星/暗星, 星座, 宇宙) over spreadsheet
+  language (篩選條件, 資料點).
+
 ## Stack
 
 - Next.js 16 (App Router) + React 19 + TypeScript 5.9, single package (no monorepo)
