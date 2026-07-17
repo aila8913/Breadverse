@@ -5,20 +5,17 @@
 > For permanent history of *why* things changed, use commit messages. **For the backlog of
 > planned-but-not-done work, see GitHub Issues** (`gh issue list --repo aila8913/Breadverse`), not this file.
 
-_Last updated: 2026-07-16 (session: **no code written — this was a modeling session**, and it ended by
-finding that the five axes may be the wrong shape of model. Consulted an advisor panel (Hamelman /
-Modernist Bread / ChainBaker) on ingredient function, verified the user's guessed oil→yeast linkage (it's
-4 steps: oil coats starch → amylase can't reach it → no sugar → yeast starves, plus a second path where oil
-coats yeast cells directly), and found a real contradiction between flavor and health on the same slider
-(ChainBaker: butter wins volume + flavor at 10% fat held constant / 2025 JAMA Internal Medicine, n=221,054:
-butter highest intake = 15% higher mortality, plant oils = 16% lower). Co-derived a **five-layer model** with
-the user — L1 命名 (culture's named regions; the arrow is nominal, not causal) / L2 參數 (the sliders) /
-L3 結果 (mouthfeel, flavor, staling, nutrition) / L4 勾稽 (how params become results) / L5 手 (tacit
-knowledge; **never a slider**) — plus an explanation layer (the 7 disciplines) that lives on the *edges*,
-not as nodes. Then wrote three bread cards in the user's own notation (`docs/cards/`, uncommitted) as a
-seed dataset, and annotating them surfaced six issues (#14–#19). Headline: the user's annotation
-`//#上色 #快 #烘焙溫度 #低` implies results and equipment are nodes too — which makes **the five axes a
-*view* of a graph, not the model itself** (#15).)_
+_Last updated: 2026-07-17 (session: **no product code — a documentation/analysis session**. Consulted
+fable-advisor for a **pattern-language analysis** of the whole app in Christopher Alexander's six-part
+frame (Context / Forces / Problem / Solution / Resulting Context), saved as `docs/pattern-language.md`
+(shipped in PR #20). It collapses the philosophy scattered across CLAUDE.md / this file / memory into
+**8 named patterns** grouped into two chains — an **emotional-universe chain** (P1 3D galaxy is the soul
+→ P2 filters dim stars, never hide → P6 sliders annotate, never score) and a **rigorous-model chain**
+(P3 hybrid modeling → P4 true hydration → P8 framework-free domain core). Headline insight: **the five
+axes are the single seam where the two chains meet** — to the model they're a projection of a graph, to
+the galaxy they're star coordinates — so the #15 refactor's real risk is tearing that seam. That warning
+is filed as a comment on #15. No issues opened/closed — every insight already mapped to an existing one.
+The 2026-07-16 model-shape gate (below) still stands and still gates most work.)_
 
 ## Current state
 
@@ -46,7 +43,7 @@ seed dataset, and annotating them surfaced six issues (#14–#19). Headline: the
     are hardcoded light-mode hex (`#2a78d6`/`#898781`) because Three.js's color parser can't read CSS
     `var(--...)` custom properties — the 3D scene doesn't yet re-theme for dark mode the way the 2D
     radar/DOM chrome does.
-- **Bread cards** (`docs/cards/法棍.md`, `布里歐.md`, `潘娜朵尼.md` — **uncommitted as of this writing**):
+- **Bread cards** (`docs/cards/法棍.md`, `布里歐.md`, `潘娜朵尼.md` — committed in `2400708`):
   pure-text md, no artifact/visual treatment (the user explicitly rejected that). Written in a notation
   the user designed: `#軸/程度` tags with exact figures in the annotation, `+` for element addition, `--`
   for links, `!` for L5 hand-knowledge, coordinate **ranges** (not points — range width *is* the fuzz).
@@ -56,8 +53,11 @@ seed dataset, and annotating them surfaced six issues (#14–#19). Headline: the
   values were *not* trusted as input.
 - No test framework installed. The calc layer was sanity-checked with a one-off script (this session and
   last), not automated tests — worth adding before the logic grows further.
-- Git: repo initialized 2026-07-06; currently on branch `product-identity` with **PR #13 open**
-  (philosophy/README/marketing page). Remote: `https://github.com/aila8913/Breadverse.git`.
+- **Pattern-language doc** (`docs/pattern-language.md`, committed in `40768ca` / PR #20): the design
+  rationale behind the product philosophy, in Alexander's frame — 8 patterns, two chains, and the
+  five-axis seam. Read it before proposing structural changes; it explains *why* the current shape holds.
+- Git: repo initialized 2026-07-06; currently on `master`, working tree clean. Remote:
+  `https://github.com/aila8913/Breadverse.git`.
 
 ## Next up
 
@@ -75,7 +75,10 @@ See `gh issue list --repo aila8913/Breadverse` for the live backlog.
   (a hyperedge — two sources, one edge, which neither RDF nor property graphs support natively) has
   nothing to hang on.
 - **#15 — the structural one. Don't touch `types.ts` before #14 has an answer** ("先知道要放什麼，再決定
-  盒子長怎樣"). If it holds, the five axes become a projection and #16 stops being a bug.
+  盒子長怎樣"). If it holds, the five axes become a projection and #16 stops being a bug. **Before doing
+  this, read the seam warning** (comment on #15, derived in `docs/pattern-language.md`): the five axes are
+  where the emotional-universe chain and the rigorous-model chain meet, so the new graph model must still
+  project a stable "view for the galaxy" or `Bread3DMap` / `RadarChart` break.
 - #16 (fermentation saturates at 100 — panettone ≡ a 24h sourdough), #17 (no axis is a *result*), #18
   (`RecipeMethod` has no equipment field at all, and 水合 has no home in `kneadStyle`) — all wait on #15.
 - #19 (constellations: L1-only cross-card links, e.g. viennoiserie-for-the-rich vs pain-for-the-people)
