@@ -69,6 +69,9 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
 - **Pattern-language doc** (`docs/pattern-language.md`, committed in `40768ca` / PR #20): the design
   rationale behind the product philosophy, in Alexander's frame — 8 patterns, two chains, and the
   five-axis seam. Read it before proposing structural changes; it explains *why* the current shape holds.
+- **Edge schema** (`docs/edge-schema.md`, issue #23): the data shape for the cards' `--` links —
+  `kind`/`strength`/`reason`/hyperedge `from`, plus all 14 existing card edges encoded as a validation
+  pass. **Spec only; nothing in `src/` implements it yet** (that's #15). Read it before touching #19 or #22.
 - Git: repo initialized 2026-07-06; currently on `master`, working tree clean. Remote:
   `https://github.com/aila8913/Breadverse.git`.
 
@@ -95,8 +98,9 @@ See `gh issue list --repo aila8913/Breadverse` for the live backlog.
 - #16 (fermentation saturates at 100 — panettone ≡ a 24h sourdough), #17 (no axis is a *result*), #18
   (`RecipeMethod` has no equipment field at all, and 水合 has no home in `kneadStyle`) — all wait on #15.
 - #19 (constellations: L1-only cross-card links, e.g. viennoiserie-for-the-rich vs pain-for-the-people)
-  is independent of the *#14→#15* chain, but **now has its own prerequisite: #23** — edges need types and
-  strength before constellations have anything to draw, or the galaxy is a hairball.
+  is independent of the *#14→#15* chain. Its schema prerequisite (#23) is now **done** — but doing #23
+  surfaced a worse blocker: **the cards contain zero cross-card edges**, so #19 is short of content, not
+  of fields. More cards first.
 
 **From the 2026-07-21 Marble study — a second small chain, all about edges:**
 
@@ -106,9 +110,20 @@ See `gh issue list --repo aila8913/Breadverse` for the live backlog.
   quantity with no unit. Split into `time` / `skill` (the cards' `!` marks) / `equipment` (#18), then
   compute difficulty from incoming edge costs instead of hand-rating stars. Currency-split difficulty is
   what makes "我今天只有 2 小時" and "我是新手但不趕時間" two different star maps over one dataset.
-- **#23 — edges need `strength` (hard/soft) and `reason`.** `reason` already exists in the cards (the text
-  between the `--`); it just isn't a field yet. Marble's rule worth keeping: an edge with no reason can't
-  be reviewed by a human later.
+  **Caveat found while doing #23: the three cards contain exactly _one_ 代價 edge.** Designing a currency
+  system on a single sample is premature — write more cards first.
+- **#23 — DONE (spec only, no code): `docs/edge-schema.md`.** Edges get `kind` (#14's three types) +
+  `strength` (hard/soft) + `reason` + a `from` **array** (the cards' `+` is a hyperedge). Validated by
+  encoding all 14 `--` edges in the three cards — every one fit, no field was missing. `types.ts` was
+  deliberately **not** touched: that's #15, still behind the model-shape gate.
+  Three findings that came out of the encoding, not out of the design:
+  - Endpoints are **four** kinds, not just axes: `axis` / `bread` / `outcome` / `technique`. This dissolves
+    #14's "懸空的邊" — panettone's `-- pasta madre` edges do have a source, it just isn't an axis.
+  - Panettone's incoming edges are **all hard**; baguette's only `soft` edge is the shaping one. The cards'
+    prose ("物理給的模糊空間≈0" vs "翻車了還是麵包") is now a machine-visible fact — a first sketch of #22's
+    derived difficulty.
+  - **There is not a single cross-card edge in the data.** #19's constellations are missing *content*, not
+    a schema. That reorders #19: write more cards before building the constellation view.
 - **#24 — extract the knowledge layer to `data/*.json` with `source` + `confidence`.** Not urgent, but it
   changes how `classicBreads.ts` should be written today: cards cite sources per number, `classicBreads`
   cites nothing, and that difference is currently invisible from the code. With `confidence`, the galaxy
