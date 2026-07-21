@@ -5,7 +5,20 @@
 > For permanent history of *why* things changed, use commit messages. **For the backlog of
 > planned-but-not-done work, see GitHub Issues** (`gh issue list --repo aila8913/Breadverse`), not this file.
 
-_Last updated: 2026-07-17 (session: **no product code — a documentation/analysis session**. Consulted
+_Last updated: 2026-07-21 (session: **no product code — an external-precedent study session**. Read
+Marble (withmarble.com, its `/curriculum` knowledge graph, and the open-sourced
+[os-taxonomy](https://github.com/withmarbleapp/os-taxonomy) — 1,590 micro-topics as pure JSON) as a
+precedent for organizing domain knowledge. Filed **#22–#24**. Headline: the user extended #14's "代價"
+edge type — **cost has no unit yet**. 「揉更久」is simultaneously *time* and *skill*, and those are not
+interchangeable; so cost needs currencies (time / skill / equipment), and **difficulty becomes a derived
+node metric** (the sum of incoming edge costs, mirroring Marble's computed `centrality`) rather than a
+hand-assigned star rating. Difficulty being currency-split is what lets #7's lens grow a second dimension.
+Also noted: our edges lack `strength` (hard/soft) and don't treat the `--` text as a first-class `reason`
+field, and `classicBreads.ts` vs `docs/cards/*.md` disagree in provenance with no `source`/`confidence` to
+make that visible. No prior conclusions overturned. See the earlier 2026-07-17 entry below for the
+pattern-language work, and the 2026-07-16 model-shape gate, which still stands.)_
+
+_2026-07-17 (session: **no product code — a documentation/analysis session**. Consulted
 fable-advisor for a **pattern-language analysis** of the whole app in Christopher Alexander's six-part
 frame (Context / Forces / Problem / Solution / Resulting Context), saved as `docs/pattern-language.md`
 (shipped in PR #20). It collapses the philosophy scattered across CLAUDE.md / this file / memory into
@@ -82,7 +95,24 @@ See `gh issue list --repo aila8913/Breadverse` for the live backlog.
 - #16 (fermentation saturates at 100 — panettone ≡ a 24h sourdough), #17 (no axis is a *result*), #18
   (`RecipeMethod` has no equipment field at all, and 水合 has no home in `kneadStyle`) — all wait on #15.
 - #19 (constellations: L1-only cross-card links, e.g. viennoiserie-for-the-rich vs pain-for-the-people)
-  is independent of the chain and is the one that feeds the 3D galaxy directly.
+  is independent of the *#14→#15* chain, but **now has its own prerequisite: #23** — edges need types and
+  strength before constellations have anything to draw, or the galaxy is a hairball.
+
+**From the 2026-07-21 Marble study — a second small chain, all about edges:**
+
+> **#23 (edge schema) precedes #22 (cost currencies) precedes the difficulty lens in #7.**
+
+- **#22 — 代價 needs currencies; difficulty is derived, not assigned.** Extends #14's三型別: 「代價」is a
+  quantity with no unit. Split into `time` / `skill` (the cards' `!` marks) / `equipment` (#18), then
+  compute difficulty from incoming edge costs instead of hand-rating stars. Currency-split difficulty is
+  what makes "我今天只有 2 小時" and "我是新手但不趕時間" two different star maps over one dataset.
+- **#23 — edges need `strength` (hard/soft) and `reason`.** `reason` already exists in the cards (the text
+  between the `--`); it just isn't a field yet. Marble's rule worth keeping: an edge with no reason can't
+  be reviewed by a human later.
+- **#24 — extract the knowledge layer to `data/*.json` with `source` + `confidence`.** Not urgent, but it
+  changes how `classicBreads.ts` should be written today: cards cite sources per number, `classicBreads`
+  cites nothing, and that difference is currently invisible from the code. With `confidence`, the galaxy
+  can honestly render guessed stars hazier.
 
 Older backlog, unaffected: #1–#4 (3D map interaction feedback), #7 (health preset — but see #17: it
 currently has to use richness as a proxy because nutrition isn't an axis), #8 (normalization math — #16 is
