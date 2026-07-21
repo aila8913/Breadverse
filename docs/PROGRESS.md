@@ -56,7 +56,8 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
     are hardcoded light-mode hex (`#2a78d6`/`#898781`) because Three.js's color parser can't read CSS
     `var(--...)` custom properties — the 3D scene doesn't yet re-theme for dark mode the way the 2D
     radar/DOM chrome does.
-- **Bread cards** (`docs/cards/法棍.md`, `布里歐.md`, `潘娜朵尼.md` — committed in `2400708`):
+- **Bread cards** (`docs/cards/` — 法棍/布里歐/潘娜朵尼 in `2400708`; **巧巴達 BV-004 + 免揉麵包 BV-005**
+  added 2026-07-21 as the first two of a planned ten):
   pure-text md, no artifact/visual treatment (the user explicitly rejected that). Written in a notation
   the user designed: `#軸/程度` tags with exact figures in the annotation, `+` for element addition, `--`
   for links, `!` for L5 hand-knowledge, coordinate **ranges** (not points — range width *is* the fuzz).
@@ -64,6 +65,29 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
   資料", i.e. **the cards are a hand-authored seed dataset for a graph the app doesn't have yet.** Every
   fact in them was fetched and is sourced at the bottom of each card; `classicBreads.ts`'s hand-estimated
   values were *not* trusted as input.
+  **BV-004/005 were written to generate cross-card edges** (there were zero). They produced three, plus
+  two findings worth more than the cards themselves:
+  - **`glutenDevelopment` is a second broken axis, and it breaks the same way `fermentationTime` did.**
+    It is a plain alias for `kneadStyle` (`KNEAD_SCORE[...]`), so no-knead scores 10 and ciabatta 40 while
+    both actually reach 60–75. Filed as a comment on #17. One broken axis was a special case; two broken
+    the same way (**every axis measures input, every L3 measures output, nothing connects them**) is a
+    model-shape problem — feeds #15.
+  - **#22 now has three samples and they oppose each other**: no-knead is *time-expensive, skill-cheap*;
+    ciabatta is the clean mirror (*skill-expensive, time-cheap*); brioche is value-unchanged-cost-raised.
+    That mirror pair is the strongest argument yet that difficulty cannot collapse to one star rating.
+  - **Cross-card (constellation) edges have no `kind`.** #14's 因果/代價/前提 were counted from
+    *intra*-card edges only, so bread↔bread edges fall outside all three. Two instances exist now — per
+    #14's own rule (**先數再命名**) that is not yet enough to name a fourth type. Revisit after the
+    remaining eight cards.
+  - Two new naming sources appeared: `#命名/商業` (a registered trademark, 1982) and `#命名/媒體`.
+- **`bread-vocab` skill** (`.claude/skills/bread-vocab/SKILL.md`): the rubric for deciding whether two
+  `outcome`/`technique` endpoints are the same node. Stance: **judge by mechanism (製程原理), not by
+  sensory wording** — a working baker's frame. Seven rules; the load-bearing ones are R5 (a continuum is
+  one node with two poles, so 老化快/放得久 merge and the cards connect), R6 (`polarity: quality|defect`,
+  which does **not** conflict with no-fail-state — the craft may name defects, the app never scores the
+  baker), and R7 (**when unsure, do not merge** — merging is hard to undo, splitting is cheap).
+  It also records the decision **not** to use ML for this: at a few dozen terms a human is more accurate,
+  and externally-trained labels would normalize away the user's own wording, which is the product's value.
 - No test framework installed. The calc layer was sanity-checked with a one-off script (this session and
   last), not automated tests — worth adding before the logic grows further.
 - **Pattern-language doc** (`docs/pattern-language.md`, committed in `40768ca` / PR #20): the design

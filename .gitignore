@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude code
+# 本機的權限設定不進版控；.claude/skills/ 是刻意要跟著 repo 走的，不要一起擋掉
+.claude/settings.local.json
