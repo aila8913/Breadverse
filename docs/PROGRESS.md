@@ -5,7 +5,21 @@
 > For permanent history of *why* things changed, use commit messages. **For the backlog of
 > planned-but-not-done work, see GitHub Issues** (`gh issue list --repo aila8913/Breadverse`), not this file.
 
-_Last updated: 2026-07-22 (session: **no product code — five bread cards written as a seed dataset**.
+_Last updated: 2026-07-22 下午 (session: **no product code — the card-authoring process itself got rebuilt**.
+PR #27 merged; #28 was auto-closed by GitHub when its base branch was deleted and **cannot be reopened**
+(`Cannot change the base branch of a closed pull request`), so it was rebased and re-filed as **#29**, merged.
+Then the user rejected the current card-writing method wholesale and specified a new one, now encoded as
+**two new skills**: `bread-history` (food-origin verification — evidence tiers A–E, six failure modes,
+a technology-date gate table, four confidence levels) and `bread-card` (a **three-stage pipeline**:
+a fresh web-capable agent researches+writes → a **second, independent** agent re-verifies without seeing
+the first one's sources → `bread-vocab` converges). Ran it end-to-end on BV-003 潘娜朵尼 as a single-card
+trial. **The headline is not the card, it's the process failure it exposed**: the user had already written
+「每張卡片是獨立的」 as an inline note on BV-002 back in the first card batch, and the following six cards
+violated it anyway — **feedback that lives only on a card does not reach the next execution**, which is
+exactly why it is now a skill plus a CLAUDE.md section. Three new issues (#30 #31 #32), decisions recorded
+on #7 and #16. **BV-003 went 148 → 72 lines.** See the entry below for the batch this was built on.)_
+
+_2026-07-22 上午 (session: **no product code — five bread cards written as a seed dataset**.
 BV-004/005 (巧巴達/免揉麵包) then BV-006/007/008 (酸種鄉村/可頌/佛卡夏), plus the `bread-vocab` skill.
 Method: main session researches and cites every fact (`sonnet-engineer` has no web access), agent
 structures the card, Opus reviews. **Cross-card edges 0 → 10, so #19 is unblocked.** Headline findings:
@@ -146,6 +160,48 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
     background before being asked to decide. `bread-vocab`'s discipline #2 now requires: plain-language
     meaning → **a counter-example that settles it** → consequences → recommendation → *then* ask. The
     factual half ("is this the same mechanism?") is the assistant's job, not hers.
+- **Card-authoring skills** (`.claude/skills/`, 2026-07-22 下午 — **read these before touching any card**;
+  they are also summarized in `CLAUDE.md` so they cannot be missed):
+  - **`bread-card`** — the pipeline and the card spec. Three principles: **P1 every card starts from a
+    blank page** (no cross-card comparison sentences *inside* a card — real cross-card links must *emerge*
+    from vocabulary convergence, where they are evidence rather than the author's framing); **P2 L1 does
+    not pick a `#命名/xx` tag before researching** (same logic as「詞彙表是卡片的副產物」); **P3 one bread
+    with genuinely different methods gets separate cards** — *averaging two breads produces a bread that
+    doesn't exist*, which is precisely what happened to focaccia. Plus **N1** (the「你的濾鏡」section does
+    not belong in a card — a lens is a computation over the data, and hand-writing the answer means the
+    card can only ever have one lens), **N2** (project-level findings go to Issues, not cards), and
+    **W1–W5** (time labels on every L5 step; explicit subjects; causality written 因為…所以…; use the
+    card's own `--` notation instead of meta-prose explaining editorial decisions; **real units, not
+    normalized scores**).
+  - **`bread-history`** — origin/history verification. Evidence tiers **A** (contemporaneous primary:
+    dialect dictionaries, guild/tax records, manuscripts, gazette texts) down to **E** (recipe blogs,
+    brand sites — **zero weight**, and a brand's own origin story is marketing, not a source). Six failure
+    modes: H1 folk etymology / H2 invented tradition / H3 marketing myth / **H4 anachronism** (the
+    strongest tool — a dated technology-gate table: cheap sugar ~1801+, industrial yeast ~1860s, roller
+    milling ~1870–80s, domestic refrigeration ~1920–30s…; a claim needing a technology that didn't exist
+    yet is dead without needing a counter-source) / H5 single-source echo / **H6 a real custom hijacked by
+    a fake origin**. Output: every claim carries `確證 / 可能 / 流傳但無據 / 已否證` **plus its earliest
+    source** — and a debunking must state *why*, since a reason can be overturned by a later card but a
+    verdict cannot. **This is where #24's `source`/`confidence` first lands.**
+  - ⚠️ **Do not write or edit cards in the main session.** The main session has read the other cards and
+    will import their framing. That is what P1 exists to prevent.
+- **BV-003 潘娜朵尼 rewritten** (2026-07-22 下午, **148 → 72 lines**) as the first pipeline trial:
+  - The three-agent run worked, **and the review caught real errors in both directions**: the reviewer
+    found five factual mistakes (a 1599 ledger quantity, a dictionary edition off by 25 years, an
+    unsupported etymology candidate, a wrong article number, and「小麥」smuggled in from an 18th-century
+    paraphrase of a 15th-century Latin line that never mentions grain) — **and the writer, re-checking,
+    correctly rejected one of the reviewer's own corrections** (the reviewer dated a manuscript to the
+    1470s; its author died in 1464). Neither agent was right by default.
+  - **The user's verdict on the 65-line L1 was「其他我大概都沒興趣看下去」.** The single line she did want
+    was the 1814 dictionary's sensory description (奶油、糖、葡萄乾) — **concrete, imaginable**. Rule
+    derived: *do the verification in full, write it short; verification effort goes into not being wrong,
+    not into displaying the process.*
+  - **The story layer's bar is `確證`, not「好聽」.** Shown a story block labelled「收在這裡是因為好聽，
+    不是因為可信」, she replied「**那就刪掉**」— so anything that can only reach `流傳但無據` is deleted by
+    default. 「特色」(ingredients / how to eat / how it keeps) is *fact*, not story, and stays.
+  - Answered baking question, now recorded in `vocabulary.md`: **`輕盈度` is density, not total weight** —
+    a panettone weighs ~1 kg yet is the lightest bread in the set, because it proofs to roughly the size
+    of a small basketball. Using total weight would make it simultaneously the heaviest and the lightest.
 - **`bread-vocab` skill** (`.claude/skills/bread-vocab/SKILL.md`): the rubric for deciding whether two
   `outcome`/`technique` endpoints are the same node. Stance: **judge by mechanism (製程原理), not by
   sensory wording** — a working baker's frame. Seven rules; the load-bearing ones are R5 (a continuum is
@@ -162,8 +218,11 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
 - **Edge schema** (`docs/edge-schema.md`, issue #23): the data shape for the cards' `--` links —
   `kind`/`strength`/`reason`/hyperedge `from`, plus all 14 existing card edges encoded as a validation
   pass. **Spec only; nothing in `src/` implements it yet** (that's #15). Read it before touching #19 or #22.
-- Git: repo initialized 2026-07-06; currently on `master`, working tree clean. Remote:
-  `https://github.com/aila8913/Breadverse.git`.
+- Git: repo initialized 2026-07-06; on `master`, synced with origin. Remote:
+  `https://github.com/aila8913/Breadverse.git`. **Stacked-PR gotcha learned the hard way:** merging the
+  lower PR and deleting its branch **auto-closes the PR stacked on it, and a closed PR's base cannot be
+  changed** — so retarget the upper PR to `master` *first* (`gh pr edit <n> --base master`), then merge
+  the lower one. Recovery is a rebase (git skips the patch-identical commit) plus re-filing.
 
 ## Next up
 
@@ -222,6 +281,30 @@ See `gh issue list --repo aila8913/Breadverse` for the live backlog.
   changes how `classicBreads.ts` should be written today: cards cite sources per number, `classicBreads`
   cites nothing, and that difference is currently invisible from the code. With `confidence`, the galaxy
   can honestly render guessed stars hazier.
+
+**From the 2026-07-22 下午 process rebuild — the card backlog:**
+
+- **#30 — retrofit the eight cards' L1s.** Six exact cross-card comparison lines are listed in the issue,
+  plus the requirement that every historical claim carry a confidence level and its earliest source.
+  **BV-003 is already done** and is the worked example. Run it through `bread-card`, not by hand.
+- **#31 — split focaccia into two cards.** Reframed by P3: `hydration: 85` vs the traditional 55–65% is
+  **not a bad estimate, it is a second bread**, so `classicBreads.ts`'s slot currently holds two of them —
+  which is why the number can't simply be "fixed". Variants take their own `BV-xxx` (a sub-number like
+  `BV-008a` would pre-judge which one is authentic), share a `family:` tag, and are linked by a sourced edge.
+- **#32 — 模糊空間 and 容錯 are two independent quantities**, moved out of BV-003 under N2. Panettone is
+  the clean counter-example (legal latitude loose, physical latitude ≈ 0) and **the one place where
+  「怎麼翻車都能吃」fails** — that doesn't make the belief wrong, it marks its boundary. Feeds #22:
+  if difficulty is computed from incoming edge costs, **physical latitude is the cost source, legal
+  latitude is not**; mixing them under-rates panettone.
+- **#16 has a direction now: store fermentation in real hours, not a 0–100 score.** BV-003's L2 already
+  reads `72–120 小時`. Consequences recorded on the issue: the axes stop sharing a unit, so the radar/3D
+  views need a display-layer mapping (log scale is the natural pick, **but that's a drawing decision, not
+  a data decision** — which is exactly #15's「軸是 view」), and **the data must store the true value** or
+  changing the mapping later means recomputing everything.
+- **#7 gains a rule: lenses are never hand-written into cards.** The old「你的濾鏡」sections are a
+  pre-computed answer for one lens; a second lens (#22's difficulty) would fight them.
+  **Seven cards still carry that section, and two more carry project-critique blocks** (免揉麵包、巧巴達) —
+  that structural cleanup is pure cutting/moving, distinct from #30's research work.
 
 Older backlog, unaffected: #1–#4 (3D map interaction feedback), #7 (health preset — but see #17: it
 currently has to use richness as a proxy because nutrition isn't an axis), #8 (normalization math — #16 is
