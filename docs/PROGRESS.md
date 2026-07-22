@@ -133,9 +133,19 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
     *cost*; both got forced into endpoint position because the schema has nowhere else to put them. With
     croissant's unwritten precondition, **`edge-schema.md` is missing three fields: `cost` / `value` /
     `precondition`.** → #22, #23
-  - Five merges are left **undecided on purpose** (R7: when unsure, don't merge) and are queued for the
-    user at the end of the file — incl. whether 手法 and the mechanism it defeats are one star (which
-    settles how R3 is applied from here on).
+  - **All five judgment calls were settled the same day** and are recorded *with their background and
+    counter-examples* in §5, so they don't get re-litigated. Two set precedent beyond their own case:
+    - **The table is deliberately flat — grouping uses `tags`, never a parent node.** Bread taxonomy
+      isn't a clean tree (`lievito-madre` is both 預發酵種 and 天然酵種); a hierarchy would force it to
+      pick one parent. Reach for `tags` first from here on.
+    - **R3 merges "different reference layers of one thing", not "cause and countermeasure".**
+      `油混入麵團` (physics: fat blocks gluten linking) stays separate from `加油時機` (the human
+      response: develop gluten first, then add cold butter). Decisive reason: **#22 hangs cost on stars,
+      and physics costs nothing** — merging would attach a skill cost to a node that can't have one.
+  - Process note: the user is a **complete beginner at baking** (≠ her dev level) and asked to be given
+    background before being asked to decide. `bread-vocab`'s discipline #2 now requires: plain-language
+    meaning → **a counter-example that settles it** → consequences → recommendation → *then* ask. The
+    factual half ("is this the same mechanism?") is the assistant's job, not hers.
 - **`bread-vocab` skill** (`.claude/skills/bread-vocab/SKILL.md`): the rubric for deciding whether two
   `outcome`/`technique` endpoints are the same node. Stance: **judge by mechanism (製程原理), not by
   sensory wording** — a working baker's frame. Seven rules; the load-bearing ones are R5 (a continuum is
