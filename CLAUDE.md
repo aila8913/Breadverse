@@ -95,6 +95,28 @@ further.
 - `Recipe.version` is always hardcoded to `"v1.0"` on save — recipe versioning (v1.0 → v1.1) is a later
   "Baking Journal" phase, not implemented yet.
 
+## Bread cards (`docs/cards/*.md`) — always go through the skills
+
+The cards are a **hand-authored seed dataset** for the graph the app doesn't have yet, not documentation.
+Three skills own them; do not write or edit a card without them:
+
+- **`bread-card`** — the authoring pipeline. Cards are written by a **fresh agent with web access**
+  (`sonnet-engineer` has none), then reviewed by a **second, independent** agent, then converged.
+- **`bread-history`** — verification standard for L1 origin/name claims. Food history is a
+  high-misinformation domain; every claim carries a confidence level and its earliest source.
+- **`bread-vocab`** — converging `outcome`/`technique` endpoints into shared nodes.
+
+Three rules that get violated if you skip the skills:
+
+1. **Each card starts from a blank page.** No cross-card comparison sentences inside a card
+   ("法棍靠法律、它靠故事"). Real cross-card links must *emerge* from vocabulary convergence, where
+   they are evidence — written by hand they are just the author's framing.
+2. **L1 does not pick a `#命名/xx` category before researching.** Those tags are a byproduct of
+   convergence, never the outline.
+3. **One bread with genuinely different methods gets separate cards**, not an averaged one.
+   Averaging two breads produces a bread that doesn't exist (this is exactly what went wrong with
+   `classicBreads.ts`'s focaccia: 85% vs the traditional 55–65%).
+
 ## Collaboration style
 
 The user is using this project to learn full-stack development end-to-end, not just to ship features:
