@@ -5,7 +5,19 @@
 > For permanent history of *why* things changed, use commit messages. **For the backlog of
 > planned-but-not-done work, see GitHub Issues** (`gh issue list --repo aila8913/Breadverse`), not this file.
 
-_Last updated: 2026-07-21 (session: **no product code — an external-precedent study session**. Read
+_Last updated: 2026-07-22 (session: **no product code — five bread cards written as a seed dataset**.
+BV-004/005 (巧巴達/免揉麵包) then BV-006/007/008 (酸種鄉村/可頌/佛卡夏), plus the `bread-vocab` skill.
+Method: main session researches and cites every fact (`sonnet-engineer` has no web access), agent
+structures the card, Opus reviews. **Cross-card edges 0 → 10, so #19 is unblocked.** Headline findings:
+`glutenDevelopment` is a **second axis broken the same way** `fermentationTime` is (both measure input,
+every L3 measures output, nothing connects them — feeds #15); **richness records how much fat but never
+where it sits**, and croissant falsifies brioche's supposedly-hard 「油 shorten 麵筋」 edge by having
+*more* butter and *higher* gluten — the edge isn't wrong, it has an unwritten precondition the schema
+can't hold; the dataset's **first negative edge** (sourdough's acid cuts gluten) shows fermentation↔gluten
+is an inverted U, not monotonic; and `classicBreads.ts`'s focaccia is **~20 points off** (85 vs a
+traditional 55–65). See the entry below for the Marble study this batch was built on.)_
+
+_2026-07-21 (session: **no product code — an external-precedent study session**. Read
 Marble (withmarble.com, its `/curriculum` knowledge graph, and the open-sourced
 [os-taxonomy](https://github.com/withmarbleapp/os-taxonomy) — 1,590 micro-topics as pure JSON) as a
 precedent for organizing domain knowledge. Filed **#22–#24**. Headline: the user extended #14's "代價"
@@ -56,8 +68,8 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
     are hardcoded light-mode hex (`#2a78d6`/`#898781`) because Three.js's color parser can't read CSS
     `var(--...)` custom properties — the 3D scene doesn't yet re-theme for dark mode the way the 2D
     radar/DOM chrome does.
-- **Bread cards** (`docs/cards/` — 法棍/布里歐/潘娜朵尼 in `2400708`; **巧巴達 BV-004 + 免揉麵包 BV-005**
-  added 2026-07-21 as the first two of a planned ten):
+- **Bread cards** (`docs/cards/` — 法棍/布里歐/潘娜朵尼 in `2400708`; **巧巴達 BV-004 + 免揉麵包 BV-005**,
+  then **酸種鄉村 BV-006 + 可頌 BV-007 + 佛卡夏 BV-008**, all added 2026-07-21 — eight of a planned ten):
   pure-text md, no artifact/visual treatment (the user explicitly rejected that). Written in a notation
   the user designed: `#軸/程度` tags with exact figures in the annotation, `+` for element addition, `--`
   for links, `!` for L5 hand-knowledge, coordinate **ranges** (not points — range width *is* the fuzz).
@@ -80,6 +92,32 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
     #14's own rule (**先數再命名**) that is not yet enough to name a fourth type. Revisit after the
     remaining eight cards.
   - Two new naming sources appeared: `#命名/商業` (a registered trademark, 1982) and `#命名/媒體`.
+
+  **BV-006/007/008 (the second batch) produced four more findings, two of which hit `src/` directly:**
+  - **`classicBreads.ts`'s focaccia entry is wrong by ~20 points.** It carries `hydration: 85`, but
+    traditional focaccia genovese is **55–65%** (Del Conte 65, Hazan 66.7); 85 is a modern high-hydration
+    adaptation. The star is plotted in the wrong place today. Flagged on the card; **not fixed in code**
+    (that's a #24/#8 change, and the file's other five entries have never been audited either).
+  - **Richness records *how much* fat, never *where* the fat is — and the "where" is what decides the
+    outcome.** Brioche mixes it into the dough (shortens gluten), croissant locks it in cold layers
+    (gluten stays high *despite more butter than brioche*), focaccia pours it on the surface (never touches
+    gluten at all). All three read as one number. **Croissant is the falsifying case for brioche's
+    supposedly-hard edge 「油 shorten 麵筋」** — that edge isn't wrong, it has an unwritten precondition
+    (*the fat must be mixed in*), and `edge-schema.md` has **nowhere to put a precondition**. That is a
+    third judgment case beyond 「這張卡錯了 / 換個看法而已」 — feeds #23 and #15.
+  - **The first negative edge in the dataset**: 酸種鄉村's `#發酵/極高 -- 酸活化蛋白酶，切斷麵筋 -- #麵筋`.
+    Every other edge so far reads "more → more". **Fermentation vs gluten is an inverted U, not monotonic**,
+    and the two axes are currently computed as independent bars that cannot fight. Compounds #16.
+  - **#22 gains a fourth currency: temperature control** (croissant's lamination collapses the moment the
+    butter warms). Time / skill / equipment / **temperature** — and the same card shows richness's cost
+    depends on fat *placement*, not fat *quantity*.
+  - Cross-card edges: **3 → 10.** #19 now has content. Two new naming sources: `#命名/生產條件`
+    (the village's shared oven set the loaf size and the sourness — 酸種鄉村) and `#命名/傳說`
+    (croissant's shape-tells-you-the-fat "law", which the CNBPF says does not exist — the *disproved* kind;
+    pairs with brioche's fake story as fake-law vs fake-story). Focaccia adds a twist to `#命名/法律`:
+    **the famous one has no protection and the protected one (Focaccia di Recco col formaggio, EU
+    2015/39) is a different food entirely** — and unlike the Décret Pain, an IGP regulates *place*, not
+    *recipe*.
 - **`bread-vocab` skill** (`.claude/skills/bread-vocab/SKILL.md`): the rubric for deciding whether two
   `outcome`/`technique` endpoints are the same node. Stance: **judge by mechanism (製程原理), not by
   sensory wording** — a working baker's frame. Seven rules; the load-bearing ones are R5 (a continuum is
@@ -122,9 +160,11 @@ See `gh issue list --repo aila8913/Breadverse` for the live backlog.
 - #16 (fermentation saturates at 100 — panettone ≡ a 24h sourdough), #17 (no axis is a *result*), #18
   (`RecipeMethod` has no equipment field at all, and 水合 has no home in `kneadStyle`) — all wait on #15.
 - #19 (constellations: L1-only cross-card links, e.g. viennoiserie-for-the-rich vs pain-for-the-people)
-  is independent of the *#14→#15* chain. Its schema prerequisite (#23) is now **done** — but doing #23
-  surfaced a worse blocker: **the cards contain zero cross-card edges**, so #19 is short of content, not
-  of fields. More cards first.
+  is independent of the *#14→#15* chain. Its schema prerequisite (#23) is **done**, and the content
+  blocker it surfaced (**zero cross-card edges**) is now cleared: eight cards carry **10** of them.
+  **#19 is unblocked** — the constellations are in the data, waiting for a view. Two remaining cards
+  (from the ten-card plan: 貝果 / 白吐司 / 德式裸麥 / 史多倫 / 酒釀桂圓 — pick two) would also settle
+  whether bread↔bread edges need a fourth `kind`.
 
 **From the 2026-07-21 Marble study — a second small chain, all about edges:**
 
@@ -134,6 +174,8 @@ See `gh issue list --repo aila8913/Breadverse` for the live backlog.
   quantity with no unit. Split into `time` / `skill` (the cards' `!` marks) / `equipment` (#18), then
   compute difficulty from incoming edge costs instead of hand-rating stars. Currency-split difficulty is
   what makes "我今天只有 2 小時" and "我是新手但不趕時間" two different star maps over one dataset.
+  **Update (BV-006/007/008): a fourth currency — _temperature control_ (croissant), plus the finding that
+  richness's cost depends on where the fat sits, not how much there is.**
   **Caveat found while doing #23: the three cards contain exactly _one_ 代價 edge.** Designing a currency
   system on a single sample is premature — write more cards first.
 - **#23 — DONE (spec only, no code): `docs/edge-schema.md`.** Edges get `kind` (#14's three types) +
