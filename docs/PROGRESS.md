@@ -118,6 +118,24 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
     **the famous one has no protection and the protected one (Focaccia di Recco col formaggio, EU
     2015/39) is a different food entirely** — and unlike the Décret Pain, an IGP regulates *place*, not
     *recipe*.
+- **Vocabulary table** (`docs\vocabulary.md`, 2026-07-22): the ~90 raw `outcome`/`technique` endpoint
+  strings across BV-001…008, converged to **44 nodes** (24 outcome / 18 technique / 2 equipment) by
+  applying the `bread-vocab` rules. `id` for machines, `label`+`aka` preserve every card's original
+  wording verbatim — **not one card was edited**. Three things it exposed:
+  - **Only 9 of 24 outcome nodes are actually reachable by an edge**; the other 15 live in L3 prose with
+    nothing pointing at them. The five flavor stars (乳脂香/蛋黃香/麥香/橄欖油香/堅果調) have **zero**
+    incoming edges even though every cause is known. The cards record results without recording causes.
+  - **Converging generated constellation lines that were invisible before**: `老化速度` now links
+    BV-001/002/003/006 *with two opposing mechanisms* (fat locks water vs acid inhibits mold); `整形`
+    links five cards and will be the most expensive node in #22's derived difficulty; `蒸氣` connects
+    BV-001's steam oven to BV-005's lidded dutch oven (**two cards solving one problem**).
+  - **Two endpoints are not nodes at all** — `12–18 小時` is a *value* and `#麵筋 的「達成成本」↑` is a
+    *cost*; both got forced into endpoint position because the schema has nowhere else to put them. With
+    croissant's unwritten precondition, **`edge-schema.md` is missing three fields: `cost` / `value` /
+    `precondition`.** → #22, #23
+  - Five merges are left **undecided on purpose** (R7: when unsure, don't merge) and are queued for the
+    user at the end of the file — incl. whether 手法 and the mechanism it defeats are one star (which
+    settles how R3 is applied from here on).
 - **`bread-vocab` skill** (`.claude/skills/bread-vocab/SKILL.md`): the rubric for deciding whether two
   `outcome`/`technique` endpoints are the same node. Stance: **judge by mechanism (製程原理), not by
   sensory wording** — a working baker's frame. Seven rules; the load-bearing ones are R5 (a continuum is
