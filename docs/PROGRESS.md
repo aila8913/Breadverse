@@ -5,7 +5,19 @@
 > For permanent history of *why* things changed, use commit messages. **For the backlog of
 > planned-but-not-done work, see GitHub Issues** (`gh issue list --repo aila8913/Breadverse`), not this file.
 
-_Last updated: 2026-07-22 下午 (session: **no product code — the card-authoring process itself got rebuilt**.
+_Last updated: 2026-07-25 (session: **no product code — #33 card structure cleanup, pure cut-and-move, no research**.
+Applied `bread-card`'s N1/N2 to the eight cards. **N1**: removed the「你的濾鏡」section from all seven cards
+that still had one (潘娜朵尼 was already clean); the one line worth keeping — 可頌's「濾鏡只決定哪幾顆為你
+發亮，不決定哪幾顆存在」— was moved to `pattern-language.md` Pattern 2 as product-voice copy, not deleted.
+**N2**: removed the two `KNEAD_SCORE` critique blocks (免揉麵包, 巧巴達) and folded them into one comment on
+**#17** (they are the same finding: `glutenDevelopment` is named like an output but implemented as an input —
+the formula gives no-knead 10 / ciabatta 40 while both actually reach 60–75). Each card's L2 keeps a one-line
+pointer (「見 issue #17」) instead of the deleted `⚠️ 見下` — a pointer explaining *why the number looks like
+this* is data; the analysis is not. Both acceptance greps in #33 now return empty. **One residual left for #30**:
+免揉麵包 still has an「issue #22 的乾淨實例…法棍反過來」line — same N2/P1 nature but outside #33's scope and
+tangled with an L1 rewrite, so it goes with the #30 L1 pass. Uncommitted at session end.)_
+
+_2026-07-22 下午 (session: **no product code — the card-authoring process itself got rebuilt**.
 PR #27 merged; #28 was auto-closed by GitHub when its base branch was deleted and **cannot be reopened**
 (`Cannot change the base branch of a closed pull request`), so it was rebased and re-filed as **#29**, merged.
 Then the user rejected the current card-writing method wholesale and specified a new one, now encoded as
@@ -91,6 +103,9 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
   資料", i.e. **the cards are a hand-authored seed dataset for a graph the app doesn't have yet.** Every
   fact in them was fetched and is sourced at the bottom of each card; `classicBreads.ts`'s hand-estimated
   values were *not* trusted as input.
+  **All eight cards had the「你的濾鏡」lens section removed (2026-07-25, #33)** — a lens is a computation over
+  the data, not data; it now lives only in the app layer (#7) and its product-voice example in
+  `pattern-language.md` P2.
   **BV-004/005 were written to generate cross-card edges** (there were zero). They produced three, plus
   two findings worth more than the cards themselves:
   - **`glutenDevelopment` is a second broken axis, and it breaks the same way `fermentationTime` did.**
