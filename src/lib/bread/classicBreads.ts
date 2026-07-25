@@ -16,10 +16,20 @@ export const CLASSIC_BREADS: ClassicBreadReference[] = [
     name: "法棍 Baguette",
     axes: { hydration: 68, richness: 2, grainStructure: 95, fermentationTime: 45, glutenDevelopment: 90 },
   },
+  // 佛卡夏拆成兩顆星（#31）：以前只有一筆 hydration:85，等於把「傳統熱那亞（55–65%）」和
+  // 「現代高水版（75–95%）」平均成一顆，畫在了宇宙裡沒有任何一款佛卡夏存在的位置。兩者做法不同
+  // （水位差一整級、發酵長短不同），照 bread-card 的 P3 該是兩款麵包，不是一筆數值誤差。
+  // 注意 richness 兩顆一樣（20）：豐富度軸只算得到麵團內的油，算不到現代版大量鋪在盤底和表面的油，
+  // 所以這根軸目前分不出兩者——這是軸的破洞，不是填錯（見 issue #36）。
   {
-    id: "focaccia",
-    name: "佛卡夏 Focaccia",
-    axes: { hydration: 85, richness: 15, grainStructure: 90, fermentationTime: 40, glutenDevelopment: 60 },
+    id: "focaccia-genovese",
+    name: "佛卡夏（熱那亞） Focaccia Genovese",
+    axes: { hydration: 60, richness: 20, grainStructure: 90, fermentationTime: 45, glutenDevelopment: 60 },
+  },
+  {
+    id: "focaccia-modern",
+    name: "佛卡夏（現代高水版） Modern Focaccia",
+    axes: { hydration: 82, richness: 20, grainStructure: 90, fermentationTime: 58, glutenDevelopment: 62 },
   },
   {
     id: "brioche",

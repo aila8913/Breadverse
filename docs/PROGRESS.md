@@ -5,7 +5,23 @@
 > For permanent history of *why* things changed, use commit messages. **For the backlog of
 > planned-but-not-done work, see GitHub Issues** (`gh issue list --repo aila8913/Breadverse`), not this file.
 
-_Last updated: 2026-07-25 (session: **no product code — #33 card structure cleanup, pure cut-and-move, no research**.
+_Last updated: 2026-07-25 (session: **#31 done — focaccia split into two cards via the full pipeline**.
+Executed `bread-card`'s P3 ("averaging two breads makes a bread that doesn't exist"). `佛卡夏.md` → renamed
+**`佛卡夏（熱那亞）.md`** (BV-008, traditional 55–65% hydration) and a brand-new **`佛卡夏（現代高水版）.md`**
+(BV-009, 75–95%) written by the three-stage pipeline (web-enabled writer → independent reviewer → `bread-vocab`
+converge). The two share a `#family/佛卡夏` tag and a **sourced provenance edge** both directions (2006
+Lahey/Bittman no-knead → 2017–2020 Samin Nosrat / Bon Appétit brought high-hydration into home baking — P1's
+allowed sourced-causal-edge exception, not a hand-written comparison). **`classicBreads.ts`'s single wrong
+`focaccia`/`hydration:85` slot is now two honest stars** — `focaccia-genovese` (h60) + `focaccia-modern` (h82);
+both consumers `.map` over the array and `page.tsx`'s `.find` is null-guarded, so no id was hardcoded. Review
+caught two writer errors: a fudged Bon Appétit hydration (~95% written as "80%+" to keep a tidy range → range
+widened to 75–95, confirmed still ONE bread) and a flipped grain axis (`#麥種/低` → `/高`; grainStructure 0=全麥,
+100=純白, so white flour is HIGH). `vocabulary.md` converged to **nine cards**: two new stars `盤底鋪油`
+(4th oil position) + `底部油煎`. **New finding filed as #36** (richness axis records oil *amount*, not
+*position* — and position is what decides the outcome); card + code carry only a pointer to it, not the
+analysis (N2). Uncommitted at session end, on branch `docs/split-focaccia-p3`.)_
+
+_2026-07-25 (session: **no product code — #33 card structure cleanup, pure cut-and-move, no research**.
 Applied `bread-card`'s N1/N2 to the eight cards. **N1**: removed the「你的濾鏡」section from all seven cards
 that still had one (潘娜朵尼 was already clean); the one line worth keeping — 可頌's「濾鏡只決定哪幾顆為你
 發亮，不決定哪幾顆存在」— was moved to `pattern-language.md` Pattern 2 as product-voice copy, not deleted.
@@ -95,7 +111,8 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
     `var(--...)` custom properties — the 3D scene doesn't yet re-theme for dark mode the way the 2D
     radar/DOM chrome does.
 - **Bread cards** (`docs/cards/` — 法棍/布里歐/潘娜朵尼 in `2400708`; **巧巴達 BV-004 + 免揉麵包 BV-005**,
-  then **酸種鄉村 BV-006 + 可頌 BV-007 + 佛卡夏 BV-008**, all added 2026-07-21 — eight of a planned ten):
+  then **酸種鄉村 BV-006 + 可頌 BV-007 + 佛卡夏**, all added 2026-07-21; **佛卡夏 split into BV-008 熱那亞
+  + BV-009 現代高水版 on 2026-07-25 (#31)** — nine cards now):
   pure-text md, no artifact/visual treatment (the user explicitly rejected that). Written in a notation
   the user designed: `#軸/程度` tags with exact figures in the annotation, `+` for element addition, `--`
   for links, `!` for L5 hand-knowledge, coordinate **ranges** (not points — range width *is* the fuzz).
@@ -123,10 +140,11 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
   - Two new naming sources appeared: `#命名/商業` (a registered trademark, 1982) and `#命名/媒體`.
 
   **BV-006/007/008 (the second batch) produced four more findings, two of which hit `src/` directly:**
-  - **`classicBreads.ts`'s focaccia entry is wrong by ~20 points.** It carries `hydration: 85`, but
-    traditional focaccia genovese is **55–65%** (Del Conte 65, Hazan 66.7); 85 is a modern high-hydration
-    adaptation. The star is plotted in the wrong place today. Flagged on the card; **not fixed in code**
-    (that's a #24/#8 change, and the file's other five entries have never been audited either).
+  - **`classicBreads.ts`'s focaccia entry — FIXED 2026-07-25 (#31).** It used to carry a single
+    `hydration: 85`, which averaged the traditional genovese (**55–65%**, Del Conte 65 / Hazan 66.7) with
+    a modern high-hydration adaptation into a star plotted where no focaccia exists. Now two entries:
+    `focaccia-genovese` (h60) + `focaccia-modern` (h82). **The file's other five entries are still
+    hand-estimated and unaudited** (that audit remains #8/#24).
   - **Richness records *how much* fat, never *where* the fat is — and the "where" is what decides the
     outcome.** Brioche mixes it into the dough (shortens gluten), croissant locks it in cold layers
     (gluten stays high *despite more butter than brioche*), focaccia pours it on the surface (never touches
@@ -147,9 +165,10 @@ The 2026-07-16 model-shape gate (below) still stands and still gates most work.)
     **the famous one has no protection and the protected one (Focaccia di Recco col formaggio, EU
     2015/39) is a different food entirely** — and unlike the Décret Pain, an IGP regulates *place*, not
     *recipe*.
-- **Vocabulary table** (`docs\vocabulary.md`, 2026-07-22): the ~90 raw `outcome`/`technique` endpoint
-  strings across BV-001…008, converged to **44 nodes** (24 outcome / 18 technique / 2 equipment) by
-  applying the `bread-vocab` rules. `id` for machines, `label`+`aka` preserve every card's original
+- **Vocabulary table** (`docs\vocabulary.md`, 2026-07-22; **BV-009 merged in 2026-07-25**): the raw
+  `outcome`/`technique` endpoint strings across BV-001…009, converged to **46 nodes** by applying the
+  `bread-vocab` rules. BV-009 added two stars: `盤底鋪油` (a 4th oil-position technique) and `底部油煎`
+  (an outcome — focaccia now sits at both ends of 殼脆度). `id` for machines, `label`+`aka` preserve every card's original
   wording verbatim — **not one card was edited**. Three things it exposed:
   - **Only 9 of 24 outcome nodes are actually reachable by an edge**; the other 15 live in L3 prose with
     nothing pointing at them. The five flavor stars (乳脂香/蛋黃香/麥香/橄欖油香/堅果調) have **zero**
@@ -302,10 +321,13 @@ See `gh issue list --repo aila8913/Breadverse` for the live backlog.
 - **#30 — retrofit the eight cards' L1s.** Six exact cross-card comparison lines are listed in the issue,
   plus the requirement that every historical claim carry a confidence level and its earliest source.
   **BV-003 is already done** and is the worked example. Run it through `bread-card`, not by hand.
-- **#31 — split focaccia into two cards.** Reframed by P3: `hydration: 85` vs the traditional 55–65% is
-  **not a bad estimate, it is a second bread**, so `classicBreads.ts`'s slot currently holds two of them —
-  which is why the number can't simply be "fixed". Variants take their own `BV-xxx` (a sub-number like
-  `BV-008a` would pre-judge which one is authentic), share a `family:` tag, and are linked by a sourced edge.
+- **#31 — DONE 2026-07-25 (pending ship on `docs/split-focaccia-p3`).** Focaccia split into BV-008 熱那亞
+  + BV-009 現代高水版, `#family/佛卡夏` tag, sourced provenance edge, `classicBreads.ts` split into two stars,
+  vocab converged. Will close via the PR merge.
+- **#36 — NEW 2026-07-25: richness axis records oil _amount_, not _position_.** Surfaced writing BV-009 —
+  the same "richness can't see where the fat sits" hole that brioche/croissant/focaccia collectively expose
+  (see the BV-006/007/008 finding above), now with a 4th data point (focaccia pours oil on the pan *and*
+  surface, invisible to the axis). Waits on #15's model shape, same as #17.
 - **#32 — 模糊空間 and 容錯 are two independent quantities**, moved out of BV-003 under N2. Panettone is
   the clean counter-example (legal latitude loose, physical latitude ≈ 0) and **the one place where
   「怎麼翻車都能吃」fails** — that doesn't make the belief wrong, it marks its boundary. Feeds #22:
